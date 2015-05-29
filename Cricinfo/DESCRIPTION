@@ -4,6 +4,6 @@ Version: 0.0.0.1000
 Authors@R: person("Nick", "Zani", email = "nicholas.zani@googlemail.com", role = c("aut", "cre"))
 Description: Provides a number of functions to scrape, manipulate and graph data from Cricinfo
 Depends: R (>= 3.1.2)
-Imports: XML RCurl
+Imports: XML
 License: Free
 LazyData: true

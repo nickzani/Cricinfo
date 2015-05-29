@@ -8,12 +8,24 @@
 #' @param Clean				Do you want the data to be cleaned? Default is yes
 #' @export
 #' @examples
-#' playerInfo <- getPlayerInfo(PlayerNumber="11728", BattingBowling = "Batting", ViewType = "Inn", Clean="Y")
+#' playerInfo <- getPlayerInfo(PlayerNumber="11728", BattingBowling = "Batting", 
+#'					ViewType = "Inn", Clean="Y")
 
-getPlayerInfo <- function(PlayerNumber, BattingBowling="Batting", ViewType="Ave", Clean="Y"){
+getPlayerInfo <- function(PlayerSearch, PlayerNumber="", BattingBowling="Batting", ViewType="Ave", Clean="Y"){
   
-  theurl <- paste0("http://stats.espncricinfo.com/ci/engine/player/",PlayerNumber,".html?class=1;template=results;type=",tolower(BattingBowling),";view=innings")
-  tables <- readHTMLTable(theurl)
+  if (PlayerNumber != ""){
+  
+	theurl <- paste0("http://stats.espncricinfo.com/ci/engine/player/",PlayerNumber,".html?class=1;template=results;type=",tolower(BattingBowling),";view=innings")
+	tables <- readHTMLTable(theurl)
+	  
+	}
+	
+	else {
+
+	theurl <- paste0("http://stats.espncricinfo.com/ci/engine/player/",getPlayerNumber(PlayerSearch),".html?class=1;template=results;type=",tolower(BattingBowling),";view=innings")
+	tables <- readHTMLTable(theurl)
+	
+	}
   
   if (ViewType=="Ave"){
     
@@ -34,8 +46,6 @@ getPlayerInfo <- function(PlayerNumber, BattingBowling="Batting", ViewType="Ave"
   }
   
   else if (ViewType !="Ave" & BattingBowling=="Batting"){
-    
-    names(keptTable)
     
     names(keptTable) <- c("Runs","Mins","BallsFaced","No4s","No6s","SR","Pos","Dismissal","Inns","Blank","Opposition","Ground","StartDate","Test")
     
@@ -58,29 +68,36 @@ getPlayerInfo <- function(PlayerNumber, BattingBowling="Batting", ViewType="Ave"
     
     keptTable <- subset(keptTable, !is.na(keptTable$Runs))
     
-    ## add an innings number and an innings inc not out here
+    ## add an innings number here
     
     keptTable$InningsNo <- 1:nrow(keptTable)
-    keptTable$InningsNoIncNO <- 1:nrow(keptTable)
     
-    rownum <- 1
+  }
+  
+  else if (ViewType !="Ave" & BattingBowling=="Bowling"){
     
-    for (i in 1:nrow(keptTable)){
-      
-      rownum <- ifelse(keptTable[i,"NOFlag"] == 1, rownum-1,rownum)
-      keptTable[i,"InningsNoIncNO"] <- rownum
-      
-      rownum <- rownum + 1
-      
-      
-    }
+    names(keptTable)
     
-    keptTable$CareerAverage <- cumsum(keptTable$Runs)/keptTable$InningsNoIncNO
+    names(keptTable) <- c("Overs","Maidens","Runs","Wickets","Econ","Pos","Inns","Blank","Opposition","Ground","StartDate","Test")
     
-    keptTable$CumRuns <- cumsum(keptTable$Runs)
-    keptTable$CumMins <- cumsum(keptTable$Mins)
+    keptTable$Blank <- NULL
+    keptTable$Test <- NULL
     
-    keptTable$RunsPerMin <- keptTable$CumRuns/keptTable$CumMins
+	keptTable$Overs <- as.numeric(as.character(keptTable$Overs))
+	keptTable$Maidens <- as.numeric(as.character(keptTable$Maidens))
+    keptTable$Runs <- as.numeric(as.character(keptTable$Runs))
+    keptTable$Wickets <- as.numeric(as.character(keptTable$Wickets))
+    keptTable$Econ <- as.numeric(as.character(keptTable$Econ))
+    keptTable$Inns <- as.numeric(as.character(keptTable$Inns))
+    keptTable$Pos <- as.numeric(as.character(keptTable$Pos))
+    
+    keptTable$Opposition <- str_replace_all(keptTable$Opposition, "v ","")
+    
+    keptTable <- subset(keptTable, !is.na(keptTable$Overs))
+    
+    ## add an innings number here
+    
+    keptTable$InningsNo <- 1:nrow(keptTable)
     
   }
   
