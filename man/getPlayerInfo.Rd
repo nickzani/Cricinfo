@@ -4,19 +4,21 @@
 \alias{getPlayerInfo}
 \title{getPlayerInfo}
 \usage{
-getPlayerInfo(PlayerSearch, PlayerNumber = "", BattingBowling = "Batting",
-  ViewType = "Ave", Clean = "Y")
+getPlayerInfo(PlayerSearch, PlayerNumber = "", PlayerCountry = "England",
+  BattingBowling = "Batting", ViewType = "Ave", Clean = "Y")
 }
 \arguments{
+\item{PlayerSearch}{Name of the player to search Cricinfo for}
+
 \item{PlayerNumber}{Cricinfo player number}
+
+\item{PlayerCountry}{Country the player plays for}
 
 \item{BattingBowling}{Batting or bowling figures. Default is batting}
 
 \item{ViewType}{Data to be returned. Default is average}
 
 \item{Clean}{Do you want the data to be cleaned? Default is yes}
-
-\item{view}{Do you want to show in a table? Defaults to TRUE.}
 }
 \description{
 Scrapes player info from cricinfo

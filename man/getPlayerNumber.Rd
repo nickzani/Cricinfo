@@ -4,7 +4,7 @@
 \alias{getPlayerNumber}
 \title{Return Cricinfo player number}
 \usage{
-getPlayerNumber(Name)
+getPlayerNumber(Name, CountrySearch)
 }
 \arguments{
 \item{Name}{Player name}
