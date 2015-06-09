@@ -54,7 +54,7 @@ getPlayerInfo <- function(PlayerSearch, PlayerNumber="", PlayerCountry = "Englan
 	  }
 	  
 	  else if (ViewType !="Ave" & BattingBowling=="Batting"){
-		
+
 		names(keptTable) <- c("Runs","Mins","BallsFaced","No4s","No6s","SR","Pos","Dismissal","Inns","Blank","Opposition","Ground","StartDate","Test")
 		
 		keptTable$Blank <- NULL
@@ -84,8 +84,6 @@ getPlayerInfo <- function(PlayerSearch, PlayerNumber="", PlayerCountry = "Englan
 	  
 	  else if (ViewType !="Ave" & BattingBowling=="Bowling"){
 		
-		names(keptTable)
-		
 		names(keptTable) <- c("Overs","Maidens","Runs","Wickets","Econ","Pos","Inns","Blank","Opposition","Ground","StartDate","Test")
 		
 		keptTable$Blank <- NULL
@@ -111,8 +109,11 @@ getPlayerInfo <- function(PlayerSearch, PlayerNumber="", PlayerCountry = "Englan
 	  
 	  else if (ViewType =="Ave" & BattingBowling=="Batting"){
 		
-		names(keptTable) <- c("Overall","CareerSpan","Matches","Innings","NOs","Runs","HS","Ave","BF","SR","100s","50s","0s","4s","6s","Profile")
-		
+		if (length(names(keptTable)) == 16)
+			{names(keptTable) <- c("Overall","CareerSpan","Matches","Innings","NOs","Runs","HS","Ave","BF","SR","No100s","No50s","No0s","No4s","No6s","Profile")}
+		else if (length(names(keptTable)) == 12)	
+			{names(keptTable) <- c("Overall","CareerSpan","Matches","Innings","NOs","Runs","HS","Ave","No100s","No50s","No0s","Profile")}
+
 		keptTable$Overall <- NULL
 		keptTable$Profile <- NULL
 	  
