@@ -4,9 +4,13 @@
 \alias{compareTwoPlayerAves}
 \title{compareTwoPlayerAves}
 \usage{
-compareTwoPlayerAves(Player1, Player2)
+compareTwoPlayerAves(Player1Name, Player1Country, Player2Name, Player2Country)
 }
 \arguments{
+\item{Player1Country}{Country of the first player}
+
+\item{Player2Country}{Country of the second player}
+
 \item{Player1}{Name of the first player}
 
 \item{Player2}{Name of the second player}
@@ -15,6 +19,6 @@ compareTwoPlayerAves(Player1, Player2)
 Uses the getPlayerInfo function to return a dataframe with the two player averages
 }
 \examples{
-compareTwoPlayerAves("Stuart Broad", "Alistair Cook")
+compareTwoPlayerAves("Stuart Broad", "England", "Alastair Cook", "England")
 }
 
