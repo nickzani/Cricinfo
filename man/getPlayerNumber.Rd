@@ -4,10 +4,14 @@
 \alias{getPlayerNumber}
 \title{Return Cricinfo player number}
 \usage{
-getPlayerNumber(Name, CountrySearch)
+getPlayerNumber(Name, CountrySearch, FuzzyMatch = "N")
 }
 \arguments{
 \item{Name}{Player name}
+
+\item{CountrySearch}{Player country}
+
+\item{FuzzyMatch}{If set to N will return an exact match}
 }
 \description{
 Returns the cricinfo player number
