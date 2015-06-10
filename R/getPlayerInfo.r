@@ -15,7 +15,7 @@
 getPlayerInfo <- function(PlayerSearch, PlayerNumber="", PlayerCountry = "England", BattingBowling="Batting", ViewType="Ave", Clean="Y"){
 
 	if (!(PlayerCountry %in% c("England","Australia","New Zealand","Bangladesh","Pakistan","India","Sri Lanka","West Indies","South Africa","Zimbabwe")))
-		{ return(cat("ERROR: Country not in list. Must be one of England, Australia, New Zealand, Bangladesh \n Pakistan, India, Sri Lanka, West Indies, South Africa, Zimbabwe"))}
+		{ stop(cat("ERROR: Country not in list. Must be one of England, Australia, New Zealand, Bangladesh \n Pakistan, India, Sri Lanka, West Indies, South Africa, Zimbabwe"))}
   
 	if (PlayerNumber != ""){
   
@@ -28,7 +28,7 @@ getPlayerInfo <- function(PlayerSearch, PlayerNumber="", PlayerCountry = "Englan
 	
 		number_play <- getPlayerNumber(PlayerSearch, CountrySearch = PlayerCountry)
 	
-		if (length(number_play) == 0) { return(cat("ERROR: Player name spelt incorrectly"))}
+		if (length(number_play) == 0) { stop(cat("ERROR: Player name spelt incorrectly"))}
 		
 		theurl <- paste0("http://stats.espncricinfo.com/ci/engine/player/",number_play,".html?class=1;template=results;type=",tolower(BattingBowling),";view=innings")
 		tables <- readHTMLTable(theurl)
