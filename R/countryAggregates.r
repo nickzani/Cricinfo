@@ -2,9 +2,10 @@
 #'
 #' Creates a dataframe giving player averages against countries played against
 #' @param PlayerName			Player name to be searched for in the cricinfo database
+#' @param PlayerCountry			Country for associated player
 #' @export
 #' @examples
-#' Aggregates <- countryAggregates(PlayerName="Alastair Cook")
+#' Aggregates <- countryAggregates(PlayerName="Alastair Cook", PlayerCountry = "England")
 
 
 countryAggregates <- function(PlayerName, PlayerCountry){
